@@ -2,7 +2,7 @@ const express = require('express');
 const moment = require('moment');
 const app = express();
 
-const PORT = process.env.port || 80;
+const PORT = process.env.PORT || 80;
 
 const checkDateString = (str) => {
     const decodedStr = decodeURI(str);
