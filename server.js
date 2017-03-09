@@ -2,6 +2,8 @@ const express = require('express');
 const moment = require('moment');
 const app = express();
 
+const PORT = process.env.port || 80;
+
 const checkDateString = (str) => {
     const decodedStr = decodeURI(str);
     const date = isNaN(parseInt(decodedStr)) ? moment(decodedStr) : moment.unix(parseInt(decodedStr));
@@ -31,6 +33,6 @@ app.get('/:date', (req, res) => {
     }
 });
 
-app.listen(5000, () => {
-    console.log('Server running on port 5000');
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
