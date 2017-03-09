@@ -4,9 +4,10 @@ const app = express();
 
 const checkDateString = (str) => {
     const decodedStr = decodeURI(str);
-    const date = moment(decodedStr);
+    const date = isNaN(parseInt(decodedStr)) ? moment(decodedStr) : moment.unix(parseInt(decodedStr));
 
     if (date.isValid()) {
+        
         const dateObj = {
             unix: parseInt(date.format('X')),
             natural: date.format('MMMM DD, YYYY')
@@ -16,6 +17,12 @@ const checkDateString = (str) => {
     }
     return null;
 };
+
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+    res.render('index');
+});
 
 app.get('/:date', (req, res) => {
     if (req.params.date !== 'favicon.ico') {
